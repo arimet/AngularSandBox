@@ -9,7 +9,7 @@ It was made following Angular's tutorial : https://angular.io/tutorial
 - Initialization of the project
 - Component creation
 - Displaying a list
-- Use of `*ngIf`and `*ngFor``
+- Use of `*ngIf`and `*ngFor`
 - Creating a service
 - Routing
 
