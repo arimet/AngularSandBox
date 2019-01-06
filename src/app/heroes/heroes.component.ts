@@ -3,34 +3,39 @@ import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
 @Component({
-  selector: 'app-heroes',
-  templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css'],
+	selector: 'app-heroes',
+	templateUrl: './heroes.component.html',
+	styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent implements OnInit {
 
-  // Variables de classes
-  heroes: Hero[];
-  selectedHero: Hero;
+	// Variables de classes
+	heroes: Hero[];
 
-  constructor(private heroService: HeroService) { }
+	constructor(private heroService: HeroService) { }
 
-  ngOnInit() {
-    this.getHeroes();
-  }
+	ngOnInit() {
+		this.getHeroes();
+	}
+	/**
+	 * Fonction qui récupère nos héros
+	 */
+	getHeroes(): void {
+		this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+	}
 
-  /**
-   * Fonction qui permet de selectionner un héro au click sur la liste
-   */
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-  }
+	add(name: string): void {
+		name = name.trim();
+		if (!name) { return; }
+		this.heroService.addHero({ name } as Hero)
+			.subscribe(hero => {
+				this.heroes.push(hero);
+			});
+	}
 
-  /**
-   * Fonction qui récupère nos héros
-   */
-  getHeroes(): void {
-    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
-  }
+	delete(hero: Hero): void {
+		this.heroes = this.heroes.filter(h => h !== hero);
+		this.heroService.deleteHero(hero).subscribe();
+	}
 
 }
