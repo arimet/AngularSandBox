@@ -12,6 +12,7 @@ It was made following Angular's tutorial : https://angular.io/tutorial
 - Use of `*ngIf`and `*ngFor`
 - Creating a service
 - Routing
+- HTTP
 
 
 
